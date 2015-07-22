@@ -57,8 +57,21 @@ describe("Standings Game", function() {
 		expect(game.hasNext()).toBe(true);
 		game.next();
 		expect(game.hasNext()).toBe(true);
+		expect(game.isLast()).toBe(false);
 		game.next();
 		expect(game.hasNext()).toBe(false);
+		expect(game.isLast()).toBe(true);
+	});
+
+	it("should update standings after next is called", function() {
+		createLeague();
+		var game = new Game(league);
+		var teamA = game.getLeague().getTeams()[0];
+		expect(teamA.getPoints()).toBe(0);
+		game.next();
+		expect(teamA.getPoints()).toBe(1);
+		game.next();
+		expect(teamA.getPoints()).toBe(2);
 	});
 
 	it("should create a league", function() {
@@ -77,6 +90,18 @@ describe("Standings Game", function() {
 			var team = teams[i];
 			expect(team.getPoints()).toEqual(3);
 		};
+
+	});
+
+	it("should return teams ordered by points", function() {
+
+		createLeague();
+		league.getMatchdays()[0].getFixtures()[0].setScore(3, 0);
+		league.assign();
+		var standings = league.getTeams();
+		expect(standings.length).toEqual(4);
+		expect(standings[0].getName()).toBe("a");
+		expect(standings[3].getName()).toBe("b");
 
 	});
 

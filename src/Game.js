@@ -8,6 +8,7 @@ function Game(_league) {
 	this.getCurrentMatchday = getCurrentMatchday;
 	this.next = next;
 	this.hasNext = hasNext;
+	this.isLast = isLast;
 	this.getLeague = getLeague;
 
 	function getCurrentMatchday() {
@@ -15,11 +16,17 @@ function Game(_league) {
 	}
 
 	function next() {
+		currentMatchday.assign();
 		currentMatchday = matchdays[++matchdayIndex];
+		league.sortStandings();
 	}
 
 	function hasNext() {
 		return matchdayIndex + 1 < matchdays.length;
+	}
+
+	function isLast() {
+		return matchdayIndex + 1 == matchdays.length;
 	}
 
 	function getLeague() {

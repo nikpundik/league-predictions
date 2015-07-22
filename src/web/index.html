@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+	<script src="../Team.js"></script>
+	<script src="../Fixture.js"></script>
+	<script src="../Matchday.js"></script>
+	<script src="../League.js"></script>
+	<script src="../Game.js"></script>
+	<script src="js/prediction/prediction.js"></script>
+</head>
+<body ng-app="StandingsGame">
+	<div ng-controller="PredictionController as prediction">
+
+		<h1>{{prediction.leagueName}}</h1>	
+
+		<div ng-show="!prediction.isEnded()">
+			<h2>Fixtures</h2>
+
+			<ul>
+				<li ng-repeat="fixture in prediction.game.getCurrentMatchday().getFixtures()">
+					<span>{{fixture.getHomeTeam().getName()}}</span>
+					<span ng-click="prediction.addHomeScore(fixture)">{{fixture.getHomeScore()}}</span>
+					<span>-</span>
+					<span ng-click="prediction.addAwayScore(fixture)">{{fixture.getAwayScore()}}</span>
+					<span>{{fixture.getAwayTeam().getName()}}</span>
+				</li>
+			</ul>
+		</div>
+
+		<div>
+			<h2>Standings</h2>
+
+			<ul>
+				<li ng-repeat="team in prediction.game.getLeague().getTeams()">
+					<span>{{team.getPoints()}}</span>
+					<span>{{team.getName()}}</span>
+				</li>
+			</ul>
+		</div>
+
+		<button ng-show="!prediction.isEnded()" ng-click="prediction.next()">next</button>
+
+	</div>
+</body>
+</html>
