@@ -1,16 +1,29 @@
-function Game() {
+function Game(_league) {
 
-	var matchdays = [];
+	var league = _league;
+	var matchdays = league.getMatchdays();
+	var matchdayIndex = 0;
+	var currentMatchday = matchdays[0];
 
-	this.submit = submit;
-	this.submitted = submitted;
+	this.getCurrentMatchday = getCurrentMatchday;
+	this.next = next;
+	this.hasNext = hasNext;
+	this.getLeague = getLeague;
 
-	function submit(matchday) {
-		matchdays.push(matchday);
+	function getCurrentMatchday() {
+		return currentMatchday;
 	}
 
-	function submitted() {
-		return 1;
+	function next() {
+		currentMatchday = matchdays[++matchdayIndex];
+	}
+
+	function hasNext() {
+		return matchdayIndex + 1 < matchdays.length;
+	}
+
+	function getLeague() {
+		return league;
 	}
 
 }

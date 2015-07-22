@@ -8,6 +8,8 @@ function Fixture(_homeTeam, _awayTeam) {
 
 	this.assign = assign;
 	this.setScore = setScore;
+	this.getHomeTeam = getHomeTeam;
+	this.getAwayTeam = getAwayTeam;
 
 	function assign() {
 
@@ -25,6 +27,14 @@ function Fixture(_homeTeam, _awayTeam) {
 			awayTeam.addPoints(3);
 		}
 		
+	}
+
+	function getHomeTeam() {
+		return homeTeam;
+	}
+
+	function getAwayTeam() {
+		return awayTeam;
 	}
 
 	function setScore(_homeScore, _awayScore) {
