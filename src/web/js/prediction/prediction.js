@@ -22,6 +22,11 @@ angular.module('StandingsGame', [])
 		}
 
 		function gameFactory() {
+
+			var factory = new LeagueFactory();
+			return factory.createSerieAGame();
+
+			/*
 			var teamA = new Team("a");
 			var teamB = new Team("b");
 			var teamC = new Team("c");
@@ -43,6 +48,7 @@ angular.module('StandingsGame', [])
 			league.setTeams([teamA, teamB, teamC, teamD]);
 
 			return new Game(league);
+			*/
 		}
 
 	});
